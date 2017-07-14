@@ -9,9 +9,15 @@ import (
 )
 
 const (
-	// URL is a constant for all SKU Vault calls
-	URL = "https://app.skuvault.com/api"
+	// url is a constant for all SKU Vault calls
+	url = "https://app.skuvault.com/api"
 )
+
+// Ctr is the controls the flow of endpoints.
+type Ctr struct {
+	Inventory *ILoginCredentials
+	Products  *PLoginCredentials
+}
 
 // svController holds the struct to use to Unmarshal json and http request
 type svController struct {
@@ -19,20 +25,34 @@ type svController struct {
 	request    *http.Request
 }
 
-// LoginCredentials hold credentials to sign into SKU Vault API
-type LoginCredentials struct {
-	TenantToken string
-	UserToken   string
+// ILoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+type ILoginCredentials struct {
+	tenantToken string
+	userToken   string
+}
+
+// PLoginCredentials hold credentials to sign into SKU Vault API for product endpoints.
+type PLoginCredentials struct {
+	tenantToken string
+	userToken   string
 }
 
 // NewSession creates a new session sets credentails to make call
-func NewSession(tTok, uTok string) *LoginCredentials {
-	creds := &LoginCredentials{
-		TenantToken: tTok,
-		UserToken:   uTok,
+func NewSession(tTok, uTok string) *Ctr {
+	iCreds := &ILoginCredentials{
+		tenantToken: tTok,
+		userToken:   uTok,
 	}
 
-	return creds
+	pCreds := &PLoginCredentials{
+		tenantToken: tTok,
+		userToken:   uTok,
+	}
+
+	return &Ctr{
+		Inventory: iCreds,
+		Products:  pCreds,
+	}
 }
 
 // do internal makes calls based on information passed in from other Do calls for each endpoint

@@ -30,17 +30,18 @@ type postGetWarehouseItemQuantity struct {
 
 // ResponseGetWarehouseItemQuantity the response from SKU Vault endpoint
 type ResponseGetWarehouseItemQuantity struct {
-	Errors              []string
+	Errors              []interface{}
 	TotalQuantityOnHand int
 }
 
 // GetWarehouseItemQuantity creates http request for this SKU vault endpoint
-func (lc *LoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQuantity) *getWarehouseItemQuantity {
-	fullURL := URL + "/inventory/getWarehouseItemQuantity"
+// Returns the quantity for a specified SKU
+func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQuantity) *getWarehouseItemQuantity {
+	fullURL := url + "/inventory/getWarehouseItemQuantity"
 	credPld := &postGetWarehouseItemQuantity{
 		Sku:         pld.Sku,
-		TenantToken: lc.TenantToken,
-		UserToken:   lc.UserToken,
+		TenantToken: lc.tenantToken,
+		UserToken:   lc.userToken,
 		WarehouseID: pld.WarehouseID,
 	}
 	b, err := json.Marshal(credPld)
