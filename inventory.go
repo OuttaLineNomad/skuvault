@@ -9,11 +9,6 @@ import (
 	"net/http"
 )
 
-// getWarehouseItemQuantity holds requst for same endpoint
-type getWarehouseItemQuantity struct {
-	request *http.Request
-}
-
 // PostGetWarehouseItemQuantity global parts user needs to use for api call
 type PostGetWarehouseItemQuantity struct {
 	Sku         string
@@ -36,8 +31,8 @@ type ResponseGetWarehouseItemQuantity struct {
 
 // GetWarehouseItemQuantity creates http request for this SKU vault endpoint
 // Returns the quantity for a specified SKU
-func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQuantity) *getWarehouseItemQuantity {
-	fullURL := url + "/inventory/getWarehouseItemQuantity"
+func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQuantity) *ResponseGetWarehouseItemQuantity {
+	fullURL := url + "inventory/getWarehouseItemQuantity"
 	credPld := &postGetWarehouseItemQuantity{
 		Sku:         pld.Sku,
 		TenantToken: lc.tenantToken,
@@ -56,18 +51,11 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQ
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "application/json")
 
-	return &getWarehouseItemQuantity{
-		request: req,
-	}
-}
-
-// Do makes the request to the attached method endpoint
-func (ct *getWarehouseItemQuantity) Do() *ResponseGetWarehouseItemQuantity {
 	response := ResponseGetWarehouseItemQuantity{}
 	ctr := &svController{
-		request:    ct.request,
+		request:    req,
 		respStruct: &response,
 	}
-	ctr.do()
+	do(ctr)
 	return &response
 }

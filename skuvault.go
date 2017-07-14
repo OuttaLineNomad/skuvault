@@ -10,7 +10,7 @@ import (
 
 const (
 	// url is a constant for all SKU Vault calls
-	url = "https://app.skuvault.com/api"
+	url = "https://app.skuvault.com/api/"
 )
 
 // Ctr is the controls the flow of endpoints.
@@ -56,7 +56,7 @@ func NewSession(tTok, uTok string) *Ctr {
 }
 
 // do internal makes calls based on information passed in from other Do calls for each endpoint
-func (sc *svController) do() {
+func do(sc *svController) {
 
 	client := &http.Client{
 		Timeout: time.Second * 30,
@@ -69,6 +69,7 @@ func (sc *svController) do() {
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
+	// fmt.Println(string(b))
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,5 +1,7 @@
 package skuvault
 
+// holds all api call endpoints with that are in the folder /Products
+
 import (
 	"bytes"
 	"encoding/json"
@@ -17,6 +19,7 @@ type PostGetProducts struct {
 	ProductSKUs               []string  `json:"ProductSKUs"`
 }
 
+// postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetProducts struct {
 	ModifiedAfterDateTimeUtc  time.Time `json:"ModifiedAfterDateTimeUtc"`
 	ModifiedBeforeDateTimeUtc time.Time `json:"ModifiedBeforeDateTimeUtc"`
@@ -27,7 +30,8 @@ type postGetProducts struct {
 	UserToken                 string    `json:"UserToken"`
 }
 
-type products struct {
+// products all data on one product
+type product struct {
 	ID               string  `json:"Id"`
 	Code             string  `json:"Code"`
 	Sku              string  `json:"Sku"`
@@ -80,19 +84,14 @@ type products struct {
 
 // ResponseGetProducts the response from SKU Vault endpoint
 type ResponseGetProducts struct {
-	Products []products    `json:"Products"`
+	Products []product     `json:"Products"`
 	Errors   []interface{} `json:"Errors"`
-}
-
-// getProducts holds requst for same endpoint
-type getProducts struct {
-	request *http.Request
 }
 
 // GetProducts This call returns product(not kit) details. The date parameters include updating details as well
 // as product creation. Details do not include quantity.
-func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *getProducts {
-	fullURL := url + "/products/getProducts"
+func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *ResponseGetProducts {
+	fullURL := url + "products/getProducts"
 	credPld := &postGetProducts{
 		ModifiedAfterDateTimeUtc:  pld.ModifiedAfterDateTimeUtc,
 		ModifiedBeforeDateTimeUtc: pld.ModifiedBeforeDateTimeUtc,
@@ -114,18 +113,11 @@ func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *getProducts {
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "application/json")
 
-	return &getProducts{
-		request: req,
-	}
-}
-
-// Do makes the request to the attached method endpoint
-func (ct *getProducts) Do() *ResponseGetProducts {
 	response := ResponseGetProducts{}
 	ctr := &svController{
-		request:    ct.request,
+		request:    req,
 		respStruct: &response,
 	}
-	ctr.do()
+	do(ctr)
 	return &response
 }
