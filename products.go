@@ -21,7 +21,7 @@ type PostGetProducts struct {
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetProducts struct {
-	PostGetProducts
+	*PostGetProducts
 	TenantToken string `json:"TenantToken"`
 	UserToken   string `json:"UserToken"`
 }
@@ -89,7 +89,7 @@ type ResponseGetProducts struct {
 func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *ResponseGetProducts {
 	fullURL := url + "products/getProducts"
 	credPld := &postGetProducts{
-		PostGetProducts: *pld,
+		PostGetProducts: pld,
 		TenantToken:     lc.tenantToken,
 		UserToken:       lc.userToken,
 	}
