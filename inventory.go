@@ -17,10 +17,9 @@ type PostGetWarehouseItemQuantity struct {
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetWarehouseItemQuantity struct {
-	Sku         string `json:"sku"`
+	PostGetWarehouseItemQuantity
 	TenantToken string `json:"tenantToken"`
 	UserToken   string `json:"userToken"`
-	WarehouseID int    `json:"warehouseId"`
 }
 
 // ResponseGetWarehouseItemQuantity the response from SKU Vault endpoint
@@ -34,10 +33,9 @@ type ResponseGetWarehouseItemQuantity struct {
 func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *PostGetWarehouseItemQuantity) *ResponseGetWarehouseItemQuantity {
 	fullURL := url + "inventory/getWarehouseItemQuantity"
 	credPld := &postGetWarehouseItemQuantity{
-		Sku:         pld.Sku,
-		TenantToken: lc.tenantToken,
-		UserToken:   lc.userToken,
-		WarehouseID: pld.WarehouseID,
+		PostGetWarehouseItemQuantity: *pld,
+		TenantToken:                  lc.tenantToken,
+		UserToken:                    lc.userToken,
 	}
 	b, err := json.Marshal(credPld)
 	if err != nil {

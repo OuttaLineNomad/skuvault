@@ -21,13 +21,9 @@ type PostGetProducts struct {
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetProducts struct {
-	ModifiedAfterDateTimeUtc  time.Time `json:"ModifiedAfterDateTimeUtc"`
-	ModifiedBeforeDateTimeUtc time.Time `json:"ModifiedBeforeDateTimeUtc"`
-	PageNumber                int       `json:"PageNumber"`
-	PageSize                  int       `json:"PageSize"`
-	ProductSKUs               []string  `json:"ProductSKUs"`
-	TenantToken               string    `json:"TenantToken"`
-	UserToken                 string    `json:"UserToken"`
+	PostGetProducts
+	TenantToken string `json:"TenantToken"`
+	UserToken   string `json:"UserToken"`
 }
 
 // products all data on one product
@@ -93,13 +89,9 @@ type ResponseGetProducts struct {
 func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *ResponseGetProducts {
 	fullURL := url + "products/getProducts"
 	credPld := &postGetProducts{
-		ModifiedAfterDateTimeUtc:  pld.ModifiedAfterDateTimeUtc,
-		ModifiedBeforeDateTimeUtc: pld.ModifiedBeforeDateTimeUtc,
-		PageNumber:                pld.PageNumber,
-		PageSize:                  pld.PageSize,
-		ProductSKUs:               pld.ProductSKUs,
-		TenantToken:               lc.tenantToken,
-		UserToken:                 lc.userToken,
+		PostGetProducts: *pld,
+		TenantToken:     lc.tenantToken,
+		UserToken:       lc.userToken,
 	}
 	b, err := json.Marshal(credPld)
 	if err != nil {
