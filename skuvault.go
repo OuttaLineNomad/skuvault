@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -35,6 +36,12 @@ type ILoginCredentials struct {
 type PLoginCredentials struct {
 	tenantToken string
 	userToken   string
+}
+
+// NewEnvCredSession takes tokens from systems enviomantal varables.
+// TENANT_TOKEN and USER_TOKEN
+func NewEnvCredSession() {
+	NewSession(os.Getenv("TENANT_TOKEN"), os.Getenv("USER_TOKEN"))
 }
 
 // NewSession creates a new session sets credentails to make call
