@@ -1,6 +1,7 @@
 package skuvault
 
 import (
+	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -63,13 +64,25 @@ func NewSession(tTok, uTok string) *Ctr {
 }
 
 // do internal makes calls based on information passed in from other Do calls for each endpoint
-func do(sc *svController) {
+func do(pld interface{}, response interface{}, endPoint string) {
+	fullURL := url + endPoint
+	bt, err := json.Marshal(pld)
+	if err != nil {
+		log.Fatal(err)
+	}
+	payload := bytes.NewReader(bt)
+	req, err := http.NewRequest(http.MethodPost, fullURL, payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+	req.Header.Add("accept", "application/json")
+	req.Header.Add("content-type", "application/json")
 
 	client := &http.Client{
 		Timeout: time.Second * 30,
 	}
 
-	resp, err := client.Do(sc.request)
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -80,7 +93,7 @@ func do(sc *svController) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = json.Unmarshal(b, &sc.respStruct)
+	err = json.Unmarshal(b, &response)
 	if err != nil {
 		log.Fatal(err)
 	}
