@@ -85,13 +85,13 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *GetWarehouseItemQuant
 // GetTransactions creates http request for this SKU vault endpoint
 // Heavy throttling
 // Look at your transaction history.
-func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetWarehouseItemQuantityResponse {
+func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetTransactionsResponse {
 	credPld := &postGetTransactions{
 		GetTransactions: pld,
 		TenantToken:     lc.tenantToken,
 		UserToken:       lc.userToken,
 	}
-	response := &GetWarehouseItemQuantityResponse{}
+	response := &GetTransactionsResponse{}
 	inventoryCall(credPld, response, "getTransactions")
 	return response
 

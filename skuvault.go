@@ -21,12 +21,6 @@ type Ctr struct {
 	Products  *PLoginCredentials
 }
 
-// svController holds the struct to use to Unmarshal json and http request
-type svController struct {
-	respStruct interface{}
-	request    *http.Request
-}
-
 // ILoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
 type ILoginCredentials struct {
 	tenantToken string
@@ -42,7 +36,7 @@ type PLoginCredentials struct {
 // NewEnvCredSession takes tokens from systems enviomantal varables.
 // TENANT_TOKEN and USER_TOKEN
 func NewEnvCredSession() {
-	NewSession(os.Getenv("TENANT_TOKEN"), os.Getenv("USER_TOKEN"))
+	NewSession(os.Getenv("SV_TENANT_TOKEN"), os.Getenv("SV_USER_TOKEN"))
 }
 
 // NewSession creates a new session sets credentails to make call

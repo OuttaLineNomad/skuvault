@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// PostGetProducts global parts user needs to use for api call
-type PostGetProducts struct {
+// GetProducts global parts user needs to use for api call
+type GetProducts struct {
 	ModifiedAfterDateTimeUtc  time.Time `json:"ModifiedAfterDateTimeUtc"`
 	ModifiedBeforeDateTimeUtc time.Time `json:"ModifiedBeforeDateTimeUtc"`
 	PageNumber                int       `json:"PageNumber"`
@@ -17,7 +17,7 @@ type PostGetProducts struct {
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetProducts struct {
-	*PostGetProducts
+	*GetProducts
 	TenantToken string `json:"TenantToken"`
 	UserToken   string `json:"UserToken"`
 }
@@ -74,8 +74,8 @@ type product struct {
 	Statuses            []interface{} `json:"Statuses"`
 }
 
-// ResponseGetProducts the response from SKU Vault endpoint
-type ResponseGetProducts struct {
+// GetProductsResponse the response from SKU Vault endpoint
+type GetProductsResponse struct {
 	Products []product     `json:"Products"`
 	Errors   []interface{} `json:"Errors"`
 }
@@ -84,14 +84,14 @@ type ResponseGetProducts struct {
 // Heavy throttling
 // This call returns product(not kit) details. The date parameters include updating details as well as product
 // creation. Details do not include quantity.
-func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *ResponseGetProducts {
+func (lc *PLoginCredentials) GetProducts(pld *GetProducts) *GetProductsResponse {
 	credPld := &postGetProducts{
-		PostGetProducts: pld,
-		TenantToken:     lc.tenantToken,
-		UserToken:       lc.userToken,
+		GetProducts: pld,
+		TenantToken: lc.tenantToken,
+		UserToken:   lc.userToken,
 	}
 
-	response := &ResponseGetProducts{}
+	response := &GetProductsResponse{}
 	productsCall(credPld, response, "getProducts")
 	return response
 }
