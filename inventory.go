@@ -68,6 +68,7 @@ type GetTransactionsResponse struct {
 }
 
 // GetWarehouseItemQuantity creates http request for this SKU vault endpoint
+// Heavy throttling
 // Returns the quantity for a specified SKU
 func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *GetWarehouseItemQuantity) *GetWarehouseItemQuantityResponse {
 	credPld := &postGetWarehouseItemQuantity{
@@ -82,6 +83,7 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *GetWarehouseItemQuant
 }
 
 // GetTransactions creates http request for this SKU vault endpoint
+// Heavy throttling
 // Look at your transaction history.
 func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetWarehouseItemQuantityResponse {
 	credPld := &postGetTransactions{
@@ -95,6 +97,7 @@ func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetWarehouse
 
 }
 
+// inventoryCalladds inventory/ to url for do() call.
 func inventoryCall(pld interface{}, response interface{}, endPoint string) {
 	full := "inventory/" + endPoint
 	do(pld, response, full)

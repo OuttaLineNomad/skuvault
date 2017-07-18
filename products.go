@@ -3,10 +3,6 @@ package skuvault
 // holds all api call endpoints with that are in the folder /Products
 
 import (
-	"bytes"
-	"encoding/json"
-	"log"
-	"net/http"
 	"time"
 )
 
@@ -84,32 +80,24 @@ type ResponseGetProducts struct {
 	Errors   []interface{} `json:"Errors"`
 }
 
-// GetProducts This call returns product(not kit) details. The date parameters include updating details as well
-// as product creation. Details do not include quantity.
+// GetProducts creates http request for this SKU vault endpoint
+// Heavy throttling
+// This call returns product(not kit) details. The date parameters include updating details as well as product
+// creation. Details do not include quantity.
 func (lc *PLoginCredentials) GetProducts(pld *PostGetProducts) *ResponseGetProducts {
-	fullURL := url + "products/getProducts"
 	credPld := &postGetProducts{
 		PostGetProducts: pld,
 		TenantToken:     lc.tenantToken,
 		UserToken:       lc.userToken,
 	}
-	b, err := json.Marshal(credPld)
-	if err != nil {
-		log.Fatal(err)
-	}
-	payload := bytes.NewReader(b)
-	req, err := http.NewRequest(http.MethodPost, fullURL, payload)
-	if err != nil {
-		log.Fatal(err)
-	}
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("content-type", "application/json")
 
-	response := ResponseGetProducts{}
-	ctr := &svController{
-		request:    req,
-		respStruct: &response,
-	}
-	do(ctr)
-	return &response
+	response := &ResponseGetProducts{}
+	productsCall(credPld, response, "getProducts")
+	return response
+}
+
+// productsCall adds products/ to url for do() call.
+func productsCall(pld interface{}, response interface{}, endPoint string) {
+	full := "products/" + endPoint
+	do(pld, response, full)
 }
