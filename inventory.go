@@ -29,7 +29,7 @@ type GetWarehouseItemQuantityResponse struct {
 type GetTransactions struct {
 	FromDate                  time.Time
 	ToDate                    time.Time
-	WarehouseID               string
+	WarehouseID               int
 	TransactionType           string
 	TransactionReasons        []string
 	ExcludeTransactionReasons []string

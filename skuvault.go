@@ -35,8 +35,8 @@ type PLoginCredentials struct {
 
 // NewEnvCredSession takes tokens from systems enviomantal varables.
 // TENANT_TOKEN and USER_TOKEN
-func NewEnvCredSession() {
-	NewSession(os.Getenv("SV_TENANT_TOKEN"), os.Getenv("SV_USER_TOKEN"))
+func NewEnvCredSession() *Ctr {
+	return NewSession(os.Getenv("SV_TENANT_TOKEN"), os.Getenv("SV_USER_TOKEN"))
 }
 
 // NewSession creates a new session sets credentails to make call
