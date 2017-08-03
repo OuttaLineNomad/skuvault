@@ -87,7 +87,7 @@ func do(pld interface{}, response interface{}, endPoint string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = json.Unmarshal(b, &response)
+	err = json.Unmarshal(b, response)
 	if err != nil {
 		log.Fatal(err)
 	}

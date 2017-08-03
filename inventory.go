@@ -67,6 +67,36 @@ type GetTransactionsResponse struct {
 	Errors       []interface{}
 }
 
+// GetInventoryByLocation global parts user needs to use for api call
+type GetInventoryByLocation struct {
+	IsReturnByCodes bool
+	PageNumber      int
+	PageSize        int
+	ProductCodes    []string
+	ProductSKUs     []string
+}
+
+// postGetInventoryByLocation payload sent to Sku Vault
+type postGetInventoryByLocation struct {
+	*GetInventoryByLocation
+	TenantToken string
+	Usertoken   string
+}
+
+// SkuLocations list of locations of one SKU.
+type SkuLocations struct {
+	WarehouseCode string
+	LocationCode  string
+	Quantity      int
+	Reserve       bool
+}
+
+// GetInventoryByLocationResponse the response from SKU Vault endpoint
+type GetInventoryByLocationResponse struct {
+	Items  map[string][]SkuLocations
+	Errors []interface{}
+}
+
 // GetWarehouseItemQuantity creates http request for this SKU vault endpoint
 // Heavy throttling
 // Returns the quantity for a specified SKU
@@ -93,6 +123,21 @@ func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetTransacti
 	}
 	response := &GetTransactionsResponse{}
 	inventoryCall(credPld, response, "getTransactions")
+	return response
+
+}
+
+// GetInventoryByLocation creates http request for this SKU vault endpoint
+// Heavy throttling
+// Returns location and warehouse per product.
+func (lc *ILoginCredentials) GetInventoryByLocation(pld *GetInventoryByLocation) *GetInventoryByLocationResponse {
+	credPld := &postGetInventoryByLocation{
+		GetInventoryByLocation: pld,
+		TenantToken:            lc.tenantToken,
+		Usertoken:              lc.userToken,
+	}
+	response := &GetInventoryByLocationResponse{}
+	inventoryCall(credPld, response, "getInventoryByLocation")
 	return response
 
 }
