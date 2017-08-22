@@ -39,7 +39,7 @@ type GetTransactions struct {
 
 // postGetTransactions payload sent to Sku Vault
 type postGetTransactions struct {
-	*GetTransactions
+	*postGetConvert
 	TenantToken string
 	UserToken   string
 }
@@ -112,15 +112,37 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *GetWarehouseItemQuant
 	return response
 }
 
+type postGetConvert struct {
+	FromDate                  string
+	ToDate                    string
+	WarehouseID               int
+	TransactionType           string
+	TransactionReasons        []string
+	ExcludeTransactionReasons []string
+	PageNumber                int
+	PageSize                  int
+}
+
 // GetTransactions creates http request for this SKU vault endpoint
 // Heavy throttling
 // Look at your transaction history.
 func (lc *ILoginCredentials) GetTransactions(pld *GetTransactions) *GetTransactionsResponse {
-	credPld := &postGetTransactions{
-		GetTransactions: pld,
-		TenantToken:     lc.tenantToken,
-		UserToken:       lc.userToken,
+	convPld := &postGetConvert{
+		FromDate:                  pld.FromDate.Format("2006-01-02T15:04:05.9999999Z"),
+		ToDate:                    pld.ToDate.Format("2006-01-02T15:04:05.9999999Z"),
+		WarehouseID:               pld.WarehouseID,
+		TransactionType:           pld.TransactionType,
+		TransactionReasons:        pld.TransactionReasons,
+		ExcludeTransactionReasons: pld.ExcludeTransactionReasons,
+		PageNumber:                pld.PageNumber,
+		PageSize:                  pld.PageSize,
 	}
+	credPld := &postGetTransactions{
+		postGetConvert: convPld,
+		TenantToken:          lc.tenantToken,
+		UserToken:            lc.userToken,
+	}
+
 	response := &GetTransactionsResponse{}
 	inventoryCall(credPld, response, "getTransactions")
 	return response
