@@ -23,14 +23,14 @@ type Ctr struct {
 
 // ILoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
 type ILoginCredentials struct {
-	tenantToken string
-	userToken   string
+	TenantToken string
+	UserToken   string
 }
 
 // PLoginCredentials hold credentials to sign into SKU Vault API for product endpoints.
 type PLoginCredentials struct {
-	tenantToken string
-	userToken   string
+	TenantToken string
+	UserToken   string
 }
 
 // NewEnvCredSession takes tokens from systems enviomantal varables.
@@ -42,13 +42,13 @@ func NewEnvCredSession() *Ctr {
 // NewSession creates a new session sets credentails to make call
 func NewSession(tTok, uTok string) *Ctr {
 	iCreds := &ILoginCredentials{
-		tenantToken: tTok,
-		userToken:   uTok,
+		TenantToken: tTok,
+		UserToken:   uTok,
 	}
 
 	pCreds := &PLoginCredentials{
-		tenantToken: tTok,
-		userToken:   uTok,
+		TenantToken: tTok,
+		UserToken:   uTok,
 	}
 
 	return &Ctr{
@@ -92,4 +92,9 @@ func do(pld interface{}, response interface{}, endPoint string) {
 		log.Fatal(err)
 	}
 
+}
+
+// TimeString converts time to proper formated string for Sku Vault
+func TimeString(t time.Time) string {
+	return t.Format("2006-01-02T15:04:05.9999999Z")
 }
