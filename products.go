@@ -2,7 +2,7 @@ package skuvault
 
 import "github.com/OuttaLineNomad/skuvault/products"
 
-// holds all api call endpoints with that are in the folder /Products
+// holds all api call endpoints for calles to SKU Vault API under /Products.
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetProducts struct {
@@ -30,8 +30,10 @@ func (lc *PLoginCredentials) AddItem(pld *products.AddItem) *products.AddItemRes
 	return response
 }
 
-// This call returns product(not kit) details. The date parameters include updating details as well as product
-// creation. Details do not include quantity.
+// GetProducts creates http request for this SKU vault endpoint
+// Heavy throttling
+// This call returns product(not kit) details. The date parameters include updating details
+// as well as product creation. Details do not include quantity.
 func (lc *PLoginCredentials) GetProducts(pld *products.GetProducts) *products.GetProductsResponse {
 	credPld := &postGetProducts{
 		GetProducts:       pld,
@@ -43,7 +45,7 @@ func (lc *PLoginCredentials) GetProducts(pld *products.GetProducts) *products.Ge
 	return response
 }
 
-// productsCall adds products/ to url for do() call.
+// productsCall adds products/ to url for do call.
 func productsCall(pld interface{}, response interface{}, endPoint string) {
 	full := "products/" + endPoint
 	do(pld, response, full)

@@ -2,7 +2,7 @@ package skuvault
 
 import "github.com/OuttaLineNomad/skuvault/inventory"
 
-// holds all api call endpoints with that are in the folder /Inventory
+// holds all api call endpoints for calles to SKU Vault API under /Inventory.
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault
 type postGetWarehouseItemQuantity struct {
@@ -65,7 +65,7 @@ func (lc *ILoginCredentials) GetInventoryByLocation(pld *inventory.GetInventoryB
 
 }
 
-// inventoryCalladds inventory/ to url for do() call.
+// inventoryCalladds inventory/ to url for do call.
 func inventoryCall(pld interface{}, response interface{}, endPoint string) {
 	full := "inventory/" + endPoint
 	do(pld, response, full)
