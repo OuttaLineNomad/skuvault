@@ -24,6 +24,7 @@ type GetProducts struct {
 	PageNumber                int
 	PageSize                  int
 	ProductSKUs               []string
+	ProductCodes              []string
 }
 
 // Product all data on one product
