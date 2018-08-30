@@ -25,48 +25,48 @@ type postGetInventoryByLocation struct {
 // GetWarehouseItemQuantity creates http request for this SKU vault endpoint
 // Heavy throttling
 // Returns the quantity for a specified SKU
-func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *inventory.GetWarehouseItemQuantity) *inventory.GetWarehouseItemQuantityResponse {
+func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *inventory.GetWarehouseItemQuantity) (*inventory.GetWarehouseItemQuantityResponse, error) {
 	credPld := &postGetWarehouseItemQuantity{
 		GetWarehouseItemQuantity: pld,
 		ILoginCredentials:        lc,
 	}
 
 	response := &inventory.GetWarehouseItemQuantityResponse{}
-	inventoryCall(credPld, response, "getWarehouseItemQuantity")
-	return response
+	err := inventoryCall(credPld, response, "getWarehouseItemQuantity")
+	return response, err
 }
 
 // GetTransactions creates http request for this SKU vault endpoint
 // Heavy throttling
 // Look at your transaction history.
-func (lc *ILoginCredentials) GetTransactions(pld *inventory.GetTransactions) *inventory.GetTransactionsResponse {
+func (lc *ILoginCredentials) GetTransactions(pld *inventory.GetTransactions) (*inventory.GetTransactionsResponse, error) {
 	credPld := &postGetTransactions{
 		GetTransactions:   pld,
 		ILoginCredentials: lc,
 	}
 
 	response := &inventory.GetTransactionsResponse{}
-	inventoryCall(credPld, response, "getTransactions")
-	return response
+	err := inventoryCall(credPld, response, "getTransactions")
+	return response, err
 
 }
 
 // GetInventoryByLocation creates http request for this SKU vault endpoint
 // Heavy throttling
 // Returns location and warehouse per product.
-func (lc *ILoginCredentials) GetInventoryByLocation(pld *inventory.GetInventoryByLocation) *inventory.GetInventoryByLocationResponse {
+func (lc *ILoginCredentials) GetInventoryByLocation(pld *inventory.GetInventoryByLocation) (*inventory.GetInventoryByLocationResponse, error) {
 	credPld := &postGetInventoryByLocation{
 		GetInventoryByLocation: pld,
 		ILoginCredentials:      lc,
 	}
 	response := &inventory.GetInventoryByLocationResponse{}
-	inventoryCall(credPld, response, "getInventoryByLocation")
-	return response
+	err := inventoryCall(credPld, response, "getInventoryByLocation")
+	return response, err
 
 }
 
 // inventoryCalladds inventory/ to url for do call.
-func inventoryCall(pld interface{}, response interface{}, endPoint string) {
+func inventoryCall(pld interface{}, response interface{}, endPoint string) error {
 	full := "inventory/" + endPoint
-	do(pld, response, full)
+	return do(pld, response, full)
 }

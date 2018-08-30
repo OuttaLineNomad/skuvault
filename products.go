@@ -19,34 +19,34 @@ type postAddItem struct {
 // AddItem creates http request for this SKU vault endpoint
 // Moderate throttling
 // Add quantity to a warehouse location. Bulk version available
-func (lc *PLoginCredentials) AddItem(pld *products.AddItem) *products.AddItemResponse {
+func (lc *PLoginCredentials) AddItem(pld *products.AddItem) (*products.AddItemResponse, error) {
 	credPld := &postAddItem{
 		AddItem:           pld,
 		PLoginCredentials: lc,
 	}
 
 	response := &products.AddItemResponse{}
-	productsCall(credPld, response, "addItem")
-	return response
+	err := productsCall(credPld, response, "addItem")
+	return response, err
 }
 
 // GetProducts creates http request for this SKU vault endpoint
 // Heavy throttling
 // This call returns product(not kit) details. The date parameters include updating details
 // as well as product creation. Details do not include quantity.
-func (lc *PLoginCredentials) GetProducts(pld *products.GetProducts) *products.GetProductsResponse {
+func (lc *PLoginCredentials) GetProducts(pld *products.GetProducts) (*products.GetProductsResponse, error) {
 	credPld := &postGetProducts{
 		GetProducts:       pld,
 		PLoginCredentials: lc,
 	}
 
 	response := &products.GetProductsResponse{}
-	productsCall(credPld, response, "getProducts")
-	return response
+	err := productsCall(credPld, response, "getProducts")
+	return response, err
 }
 
 // productsCall adds products/ to url for do call.
-func productsCall(pld interface{}, response interface{}, endPoint string) {
+func productsCall(pld interface{}, response interface{}, endPoint string) error {
 	full := "products/" + endPoint
-	do(pld, response, full)
+	return do(pld, response, full)
 }

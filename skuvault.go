@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"time"
@@ -33,6 +32,17 @@ type PLoginCredentials struct {
 	UserToken   string
 }
 
+// Error struct to share errors from package
+type Error struct {
+	Func string
+	Err  error
+}
+
+// Error func to customize errors from package.
+func (er *Error) Error() string {
+	return `skuvault: ` + er.Func + `: ` + er.Err.Error()
+}
+
 // NewEnvCredSession takes tokens from systems enviomantal varables.
 // TENANT_TOKEN and USER_TOKEN
 func NewEnvCredSession() *Ctr {
@@ -58,16 +68,16 @@ func NewSession(tTok, uTok string) *Ctr {
 }
 
 // do internal makes calls based on information passed in from other Do calls for each endpoint
-func do(pld interface{}, response interface{}, endPoint string) {
+func do(pld interface{}, response interface{}, endPoint string) error {
 	fullURL := url + endPoint
 	bt, err := json.Marshal(pld)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	payload := bytes.NewReader(bt)
 	req, err := http.NewRequest(http.MethodPost, fullURL, payload)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "application/json")
@@ -78,19 +88,20 @@ func do(pld interface{}, response interface{}, endPoint string) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
 	// fmt.Println(string(b))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	err = json.Unmarshal(b, response)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+	return nil
 
 }
 
