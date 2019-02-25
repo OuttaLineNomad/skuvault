@@ -3,6 +3,7 @@ package skuvault
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -99,6 +100,7 @@ func do(pld interface{}, response interface{}, endPoint string) error {
 	}
 	err = json.Unmarshal(b, response)
 	if err != nil {
+		fmt.Println("sv response with caused error: \n", string(b))
 		return err
 	}
 	return nil

@@ -1,6 +1,8 @@
 package skuvault
 
-import "github.com/OuttaLineNomad/skuvault/inventory"
+import (
+	"github.com/OuttaLineNomad/skuvault/inventory"
+)
 
 // holds all api call endpoints for calles to SKU Vault API under /Inventory.
 
@@ -44,7 +46,6 @@ func (lc *ILoginCredentials) GetTransactions(pld *inventory.GetTransactions) (*i
 		GetTransactions:   pld,
 		ILoginCredentials: lc,
 	}
-
 	response := &inventory.GetTransactionsResponse{}
 	err := inventoryCall(credPld, response, "getTransactions")
 	return response, err
