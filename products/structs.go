@@ -29,7 +29,7 @@ type GetProducts struct {
 
 // Product all data on one product
 type Product struct {
-	ID               string
+	ID               interface{}
 	Code             string
 	Sku              string
 	PartNumber       string
