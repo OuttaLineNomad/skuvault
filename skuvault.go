@@ -3,82 +3,121 @@ package skuvault
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"time"
 )
 
 const (
-	// url is a constant for all SKU Vault calls
+	// url is a constant for all sku vault calls
 	url = "https://app.skuvault.com/api/"
 )
 
 // Ctr is the controls the flow of endpoints.
 type Ctr struct {
-	Inventory *ILoginCredentials
-	Products  *PLoginCredentials
+	inventory      *ILoginCredentials
+	products       *PLoginCredentials
+	sales          *SLoginCredentials
+	purchaseorders *POLoginCredentials
+	integration    *INLoginCredentials
+}
+
+// LoginCredentials hold credentials to sign into SKU Vault API for endpoints.
+type LoginCredentials struct {
+	TenantToken string
+	UserToken   string
 }
 
 // ILoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
 type ILoginCredentials struct {
-	TenantToken string
-	UserToken   string
+	LoginCredentials
 }
 
-// PLoginCredentials hold credentials to sign into SKU Vault API for product endpoints.
+// PLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
 type PLoginCredentials struct {
-	TenantToken string
-	UserToken   string
+	LoginCredentials
 }
 
-// Error struct to share errors from package
-type Error struct {
-	Func string
-	Err  error
+// SLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+type SLoginCredentials struct {
+	LoginCredentials
 }
 
-// Error func to customize errors from package.
-func (er *Error) Error() string {
-	return `skuvault: ` + er.Func + `: ` + er.Err.Error()
+// POLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+type POLoginCredentials struct {
+	LoginCredentials
 }
 
-// NewEnvCredSession takes tokens from systems enviomantal varables.
+// INLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+type INLoginCredentials struct {
+	LoginCredentials
+}
+
+// New takes tokens from systems environmental varables.
 // TENANT_TOKEN and USER_TOKEN
-func NewEnvCredSession() *Ctr {
+func New() *Ctr {
 	return NewSession(os.Getenv("SV_TENANT_TOKEN"), os.Getenv("SV_USER_TOKEN"))
 }
 
 // NewSession creates a new session sets credentails to make call
 func NewSession(tTok, uTok string) *Ctr {
-	iCreds := &ILoginCredentials{
-		TenantToken: tTok,
-		UserToken:   uTok,
-	}
-
-	pCreds := &PLoginCredentials{
+	svc := LoginCredentials{
 		TenantToken: tTok,
 		UserToken:   uTok,
 	}
 
 	return &Ctr{
-		Inventory: iCreds,
-		Products:  pCreds,
+		inventory:      &ILoginCredentials{svc},
+		products:       &PLoginCredentials{svc},
+		sales:          &SLoginCredentials{svc},
+		purchaseorders: &POLoginCredentials{svc},
+		integration:    &INLoginCredentials{svc},
 	}
 }
 
+// postGetTokens payload sent to Sku Vault.
+type postGetTokens struct {
+	*GetTokens
+}
+
+// GetTokensResponse is a automatically generated struct from json provided by sku vault's api docs.
+type GetTokensResponse struct {
+	TenantToken string
+	UserToken   string
+}
+
+// GetTokens is a automatically generated struct from json provided by sku vault's api docs.
+type GetTokens struct {
+	Email    string
+	Password string
+}
+
+// GetTokensCall creates http request for this SKU vault endpoint.
+// Very Light Throttle.
+// Use this call to retrieve your API tokens from SkuVault using your login email and password..
+func GetTokensCall(pld *GetTokens) *GetTokensResponse {
+	credPld := &postGetTokens{
+		GetTokens: pld,
+	}
+
+	response := &GetTokensResponse{}
+	do(credPld, response, "skuvault/getTokens")
+	return response
+}
+
 // do internal makes calls based on information passed in from other Do calls for each endpoint
-func do(pld interface{}, response interface{}, endPoint string) error {
+func do(pld interface{}, response interface{}, endPoint string) {
 	fullURL := url + endPoint
 	bt, err := json.Marshal(pld)
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 	payload := bytes.NewReader(bt)
 	req, err := http.NewRequest(http.MethodPost, fullURL, payload)
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "application/json")
@@ -89,21 +128,19 @@ func do(pld interface{}, response interface{}, endPoint string) error {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
 	// fmt.Println(string(b))
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 	err = json.Unmarshal(b, response)
 	if err != nil {
-		fmt.Println("sv response with caused error: \n", string(b))
-		return err
+		log.Fatal(err)
 	}
-	return nil
 
 }
 
