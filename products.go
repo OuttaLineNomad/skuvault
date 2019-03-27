@@ -19,7 +19,11 @@ func (lc *PLoginCredentials) CreateBrands(pld *products.CreateBrands) (*products
 
 	response := &products.CreateBrandsResponse{}
 	err := do(credPld, response, "products/createBrands")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateBrands()", err}
+	}
+
+	return response, nil
 }
 
 // postCreateKit payload sent to Sku Vault.
@@ -39,7 +43,11 @@ func (lc *PLoginCredentials) CreateKit(pld *products.CreateKit) (*products.Creat
 
 	response := &products.CreateKitResponse{}
 	err := do(credPld, response, "products/createKit")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateKit()", err}
+	}
+
+	return response, nil
 }
 
 // postCreateProduct payload sent to Sku Vault.
@@ -59,7 +67,11 @@ func (lc *PLoginCredentials) CreateProduct(pld *products.CreateProduct) (*produc
 
 	response := &products.CreateProductResponse{}
 	err := do(credPld, response, "products/createProduct")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateProduct()", err}
+	}
+
+	return response, nil
 }
 
 // postCreateProducts payload sent to Sku Vault.
@@ -79,7 +91,11 @@ func (lc *PLoginCredentials) CreateProducts(pld *products.CreateProducts) (*prod
 
 	response := &products.CreateProductsResponse{}
 	err := do(credPld, response, "products/createProducts")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateProducts()", err}
+	}
+
+	return response, nil
 }
 
 // postCreateSuppliers payload sent to Sku Vault.
@@ -99,7 +115,11 @@ func (lc *PLoginCredentials) CreateSuppliers(pld *products.CreateSuppliers) (*pr
 
 	response := &products.CreateSuppliersResponse{}
 	err := do(credPld, response, "products/createSuppliers")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateSuppliers()", err}
+	}
+
+	return response, nil
 }
 
 // postGetBrands payload sent to Sku Vault.
@@ -119,7 +139,11 @@ func (lc *PLoginCredentials) GetBrands(pld *products.GetBrands) (*products.GetBr
 
 	response := &products.GetBrandsResponse{}
 	err := do(credPld, response, "products/getBrands")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetBrands()", err}
+	}
+
+	return response, nil
 }
 
 // postGetClassifications payload sent to Sku Vault.
@@ -139,7 +163,11 @@ func (lc *PLoginCredentials) GetClassifications(pld *products.GetClassifications
 
 	response := &products.GetClassificationsResponse{}
 	err := do(credPld, response, "products/getClassifications")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetClassifications()", err}
+	}
+
+	return response, nil
 }
 
 // postGetHandlingTime payload sent to Sku Vault.
@@ -157,7 +185,11 @@ func (lc *PLoginCredentials) GetHandlingTime() (*products.GetHandlingTimeRespons
 
 	response := &products.GetHandlingTimeResponse{}
 	err := do(credPld, response, "products/getHandlingTime")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetHandlingTime()", err}
+	}
+
+	return response, nil
 }
 
 // postGetKits payload sent to Sku Vault.
@@ -177,7 +209,11 @@ func (lc *PLoginCredentials) GetKits(pld *products.GetKits) (*products.GetKitsRe
 
 	response := &products.GetKitsResponse{}
 	err := do(credPld, response, "products/getKits")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetKits()", err}
+	}
+
+	return response, nil
 }
 
 // postGetProducts payload sent to Sku Vault.
@@ -197,7 +233,11 @@ func (lc *PLoginCredentials) GetProducts(pld *products.GetProducts) (*products.G
 
 	response := &products.GetProductsResponse{}
 	err := do(credPld, response, "products/getProducts")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetProducts()", err}
+	}
+
+	return response, nil
 }
 
 // postGetSuppliers payload sent to Sku Vault.
@@ -217,7 +257,11 @@ func (lc *PLoginCredentials) GetSuppliers(pld *products.GetSuppliers) (*products
 
 	response := &products.GetSuppliersResponse{}
 	err := do(credPld, response, "products/getSuppliers")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetSuppliers()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateAltSKUsCodes payload sent to Sku Vault.
@@ -237,7 +281,11 @@ func (lc *PLoginCredentials) UpdateAltSKUsCodes(pld *products.UpdateAltSKUsCodes
 
 	response := &products.UpdateAltSKUsCodesResponse{}
 	err := do(credPld, response, "products/updateAltSKUsCodes")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateAltSKUsCodes()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateHandlingTime payload sent to Sku Vault.
@@ -257,7 +305,11 @@ func (lc *PLoginCredentials) UpdateHandlingTime(pld *products.UpdateHandlingTime
 
 	response := &products.UpdateHandlingTimeResponse{}
 	err := do(credPld, response, "products/updateHandlingTime")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateHandlingTime()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateProduct payload sent to Sku Vault.
@@ -277,7 +329,11 @@ func (lc *PLoginCredentials) UpdateProduct(pld *products.UpdateProduct) (*produc
 
 	response := &products.UpdateProductResponse{}
 	err := do(credPld, response, "products/updateProduct")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateProduct()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateProducts payload sent to Sku Vault.
@@ -297,5 +353,9 @@ func (lc *PLoginCredentials) UpdateProducts(pld *products.UpdateProducts) (*prod
 
 	response := &products.UpdateProductsResponse{}
 	err := do(credPld, response, "products/updateProducts")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateProducts()", err}
+	}
+
+	return response, nil
 }

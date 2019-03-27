@@ -19,7 +19,11 @@ func (lc *ILoginCredentials) AddItem(pld *inventory.AddItem) (*inventory.AddItem
 
 	response := &inventory.AddItemResponse{}
 	err := do(credPld, response, "inventory/addItem")
-	return response, err
+	if err != nil {
+		return nil, &Error{"AddItem()", err}
+	}
+
+	return response, nil
 }
 
 // postAddItemBulk payload sent to Sku Vault.
@@ -39,7 +43,11 @@ func (lc *ILoginCredentials) AddItemBulk(pld *inventory.AddItemBulk) (*inventory
 
 	response := &inventory.AddItemBulkResponse{}
 	err := do(credPld, response, "inventory/addItemBulk")
-	return response, err
+	if err != nil {
+		return nil, &Error{"AddItemBulk()", err}
+	}
+
+	return response, nil
 }
 
 // postGetAvailableQuantities payload sent to Sku Vault.
@@ -59,7 +67,11 @@ func (lc *ILoginCredentials) GetAvailableQuantities(pld *inventory.GetAvailableQ
 
 	response := &inventory.GetAvailableQuantitiesResponse{}
 	err := do(credPld, response, "inventory/getAvailableQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetAvailableQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postGetExternalWarehouseQuantities payload sent to Sku Vault.
@@ -79,7 +91,11 @@ func (lc *ILoginCredentials) GetExternalWarehouseQuantities(pld *inventory.GetEx
 
 	response := &inventory.GetExternalWarehouseQuantitiesResponse{}
 	err := do(credPld, response, "inventory/getExternalWarehouseQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetExternalWarehouseQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postGetExternalWarehouses payload sent to Sku Vault.
@@ -97,7 +113,11 @@ func (lc *ILoginCredentials) GetExternalWarehouses() (*inventory.GetExternalWare
 
 	response := &inventory.GetExternalWarehousesResponse{}
 	err := do(credPld, response, "inventory/getExternalWarehouses")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetExternalWarehouses()", err}
+	}
+
+	return response, nil
 }
 
 // postGetInventoryByLocation payload sent to Sku Vault.
@@ -117,7 +137,11 @@ func (lc *ILoginCredentials) GetInventoryByLocation(pld *inventory.GetInventoryB
 
 	response := &inventory.GetInventoryByLocationResponse{}
 	err := do(credPld, response, "inventory/getInventoryByLocation")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetInventoryByLocation()", err}
+	}
+
+	return response, nil
 }
 
 // postGetItemQuantities payload sent to Sku Vault.
@@ -137,7 +161,11 @@ func (lc *ILoginCredentials) GetItemQuantities(pld *inventory.GetItemQuantities)
 
 	response := &inventory.GetItemQuantitiesResponse{}
 	err := do(credPld, response, "inventory/getItemQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetItemQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postGetKitQuantities payload sent to Sku Vault.
@@ -157,7 +185,11 @@ func (lc *ILoginCredentials) GetKitQuantities(pld *inventory.GetKitQuantities) (
 
 	response := &inventory.GetKitQuantitiesResponse{}
 	err := do(credPld, response, "inventory/getKitQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetKitQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postGetLocations payload sent to Sku Vault.
@@ -175,7 +207,11 @@ func (lc *ILoginCredentials) GetLocations() (*inventory.GetLocationsResponse, er
 
 	response := &inventory.GetLocationsResponse{}
 	err := do(credPld, response, "inventory/getLocations")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetLocations()", err}
+	}
+
+	return response, nil
 }
 
 // postGetTransactions payload sent to Sku Vault.
@@ -195,7 +231,11 @@ func (lc *ILoginCredentials) GetTransactions(pld *inventory.GetTransactions) (*i
 
 	response := &inventory.GetTransactionsResponse{}
 	err := do(credPld, response, "inventory/getTransactions")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetTransactions()", err}
+	}
+
+	return response, nil
 }
 
 // postGetWarehouseItemQuantities payload sent to Sku Vault.
@@ -215,7 +255,11 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantities(pld *inventory.GetWareho
 
 	response := &inventory.GetWarehouseItemQuantitiesResponse{}
 	err := do(credPld, response, "inventory/getWarehouseItemQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetWarehouseItemQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postGetWarehouseItemQuantity payload sent to Sku Vault.
@@ -235,7 +279,11 @@ func (lc *ILoginCredentials) GetWarehouseItemQuantity(pld *inventory.GetWarehous
 
 	response := &inventory.GetWarehouseItemQuantityResponse{}
 	err := do(credPld, response, "inventory/getWarehouseItemQuantity")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetWarehouseItemQuantity()", err}
+	}
+
+	return response, nil
 }
 
 // postGetWarehouses payload sent to Sku Vault.
@@ -255,7 +303,11 @@ func (lc *ILoginCredentials) GetWarehouses(pld *inventory.GetWarehouses) (*inven
 
 	response := &inventory.GetWarehousesResponse{}
 	err := do(credPld, response, "inventory/getWarehouses")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetWarehouses()", err}
+	}
+
+	return response, nil
 }
 
 // postPickItem payload sent to Sku Vault.
@@ -275,7 +327,11 @@ func (lc *ILoginCredentials) PickItem(pld *inventory.PickItem) (*inventory.PickI
 
 	response := &inventory.PickItemResponse{}
 	err := do(credPld, response, "inventory/pickItem")
-	return response, err
+	if err != nil {
+		return nil, &Error{"PickItem()", err}
+	}
+
+	return response, nil
 }
 
 // postPickItemBulk payload sent to Sku Vault.
@@ -295,7 +351,11 @@ func (lc *ILoginCredentials) PickItemBulk(pld *inventory.PickItemBulk) (*invento
 
 	response := &inventory.PickItemBulkResponse{}
 	err := do(credPld, response, "inventory/pickItemBulk")
-	return response, err
+	if err != nil {
+		return nil, &Error{"PickItemBulk()", err}
+	}
+
+	return response, nil
 }
 
 // postRemoveItem payload sent to Sku Vault.
@@ -315,7 +375,11 @@ func (lc *ILoginCredentials) RemoveItem(pld *inventory.RemoveItem) (*inventory.R
 
 	response := &inventory.RemoveItemResponse{}
 	err := do(credPld, response, "inventory/removeItem")
-	return response, err
+	if err != nil {
+		return nil, &Error{"RemoveItem()", err}
+	}
+
+	return response, nil
 }
 
 // postRemoveItemBulk payload sent to Sku Vault.
@@ -335,7 +399,11 @@ func (lc *ILoginCredentials) RemoveItemBulk(pld *inventory.RemoveItemBulk) (*inv
 
 	response := &inventory.RemoveItemBulkResponse{}
 	err := do(credPld, response, "inventory/removeItemBulk")
-	return response, err
+	if err != nil {
+		return nil, &Error{"RemoveItemBulk()", err}
+	}
+
+	return response, nil
 }
 
 // postSetItemQuantities payload sent to Sku Vault.
@@ -355,7 +423,11 @@ func (lc *ILoginCredentials) SetItemQuantities(pld *inventory.SetItemQuantities)
 
 	response := &inventory.SetItemQuantitiesResponse{}
 	err := do(credPld, response, "inventory/setItemQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SetItemQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postSetItemQuantity payload sent to Sku Vault.
@@ -375,7 +447,11 @@ func (lc *ILoginCredentials) SetItemQuantity(pld *inventory.SetItemQuantity) (*i
 
 	response := &inventory.SetItemQuantityResponse{}
 	err := do(credPld, response, "inventory/setItemQuantity")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SetItemQuantity()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateExternalWarehouseQuantities payload sent to Sku Vault.
@@ -395,5 +471,9 @@ func (lc *ILoginCredentials) UpdateExternalWarehouseQuantities(pld *inventory.Up
 
 	response := &inventory.UpdateExternalWarehouseQuantitiesResponse{}
 	err := do(credPld, response, "inventory/updateExternalWarehouseQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateExternalWarehouseQuantities()", err}
+	}
+
+	return response, nil
 }

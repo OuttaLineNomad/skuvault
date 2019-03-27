@@ -19,7 +19,11 @@ func (lc *POLoginCredentials) CreatePO(pld *purchaseorders.CreatePO) (*purchaseo
 
 	response := &purchaseorders.CreatePOResponse{}
 	err := do(credPld, response, "purchaseorders/createPO")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreatePO()", err}
+	}
+
+	return response, nil
 }
 
 // postGetIncomingItems payload sent to Sku Vault.
@@ -39,7 +43,11 @@ func (lc *POLoginCredentials) GetIncomingItems(pld *purchaseorders.GetIncomingIt
 
 	response := &purchaseorders.GetIncomingItemsResponse{}
 	err := do(credPld, response, "purchaseorders/getIncomingItems")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetIncomingItems()", err}
+	}
+
+	return response, nil
 }
 
 // postGetPOs payload sent to Sku Vault.
@@ -59,7 +67,11 @@ func (lc *POLoginCredentials) GetPOs(pld *purchaseorders.GetPOs) (*purchaseorder
 
 	response := &purchaseorders.GetPOsResponse{}
 	err := do(credPld, response, "purchaseorders/getPOs")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetPOs()", err}
+	}
+
+	return response, nil
 }
 
 // postGetReceivesHistory payload sent to Sku Vault.
@@ -79,7 +91,11 @@ func (lc *POLoginCredentials) GetReceivesHistory(pld *purchaseorders.GetReceives
 
 	response := &purchaseorders.GetReceivesHistoryResponse{}
 	err := do(credPld, response, "purchaseorders/getReceivesHistory")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetReceivesHistory()", err}
+	}
+
+	return response, nil
 }
 
 // postReceivePOItems payload sent to Sku Vault.
@@ -99,7 +115,11 @@ func (lc *POLoginCredentials) ReceivePOItems(pld *purchaseorders.ReceivePOItems)
 
 	response := &purchaseorders.ReceivePOItemsResponse{}
 	err := do(credPld, response, "purchaseorders/receivePOItems")
-	return response, err
+	if err != nil {
+		return nil, &Error{"ReceivePOItems()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdatePOs payload sent to Sku Vault.
@@ -119,5 +139,9 @@ func (lc *POLoginCredentials) UpdatePOs(pld *purchaseorders.UpdatePOs) (*purchas
 
 	response := &purchaseorders.UpdatePOsResponse{}
 	err := do(credPld, response, "purchaseorders/updatePOs")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdatePOs()", err}
+	}
+
+	return response, nil
 }

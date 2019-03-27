@@ -14,6 +14,16 @@ const (
 	url = "https://app.skuvault.com/api/"
 )
 
+// Error struct to store custom error message.
+type Error struct {
+	Func string
+	Err  error
+}
+
+func (er *Error) Error() string {
+	return "skuvualt: " + er.Func + ": " + er.Err.Error()
+}
+
 // Ctr is the controls the flow of endpoints.
 type Ctr struct {
 	Inventory      *ILoginCredentials

@@ -17,5 +17,9 @@ func (lc *INLoginCredentials) GetIntegrations() (*integration.GetIntegrationsRes
 
 	response := &integration.GetIntegrationsResponse{}
 	err := do(credPld, response, "integration/getIntegrations")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetIntegrations()", err}
+	}
+
+	return response, nil
 }

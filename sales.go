@@ -19,7 +19,11 @@ func (lc *SLoginCredentials) AddShipments(pld *sales.AddShipments) (*sales.AddSh
 
 	response := &sales.AddShipmentsResponse{}
 	err := do(credPld, response, "sales/addShipments")
-	return response, err
+	if err != nil {
+		return nil, &Error{"AddShipments()", err}
+	}
+
+	return response, nil
 }
 
 // postCreateHolds payload sent to Sku Vault.
@@ -39,7 +43,11 @@ func (lc *SLoginCredentials) CreateHolds(pld *sales.CreateHolds) (*sales.CreateH
 
 	response := &sales.CreateHoldsResponse{}
 	err := do(credPld, response, "sales/createHolds")
-	return response, err
+	if err != nil {
+		return nil, &Error{"CreateHolds()", err}
+	}
+
+	return response, nil
 }
 
 // postGetOnlineSaleStatus payload sent to Sku Vault.
@@ -59,7 +67,11 @@ func (lc *SLoginCredentials) GetOnlineSaleStatus(pld *sales.GetOnlineSaleStatus)
 
 	response := &sales.GetOnlineSaleStatusResponse{}
 	err := do(credPld, response, "sales/getOnlineSaleStatus")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetOnlineSaleStatus()", err}
+	}
+
+	return response, nil
 }
 
 // postGetSaleItemCost payload sent to Sku Vault.
@@ -79,7 +91,11 @@ func (lc *SLoginCredentials) GetSaleItemCost(pld *sales.GetSaleItemCost) (*sales
 
 	response := &sales.GetSaleItemCostResponse{}
 	err := do(credPld, response, "sales/getSaleItemCost")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetSaleItemCost()", err}
+	}
+
+	return response, nil
 }
 
 // postGetSales payload sent to Sku Vault.
@@ -99,7 +115,11 @@ func (lc *SLoginCredentials) GetSales(pld *sales.GetSales) (*sales.GetSalesRespo
 
 	response := &sales.GetSalesResponse{}
 	err := do(credPld, response, "sales/getSales")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetSales()", err}
+	}
+
+	return response, nil
 }
 
 // postGetSalesByDate payload sent to Sku Vault.
@@ -119,7 +139,11 @@ func (lc *SLoginCredentials) GetSalesByDate(pld *sales.GetSalesByDate) (*sales.G
 
 	response := &sales.GetSalesByDateResponse{}
 	err := do(credPld, response, "sales/getSalesByDate")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetSalesByDate()", err}
+	}
+
+	return response, nil
 }
 
 // postGetShipments payload sent to Sku Vault.
@@ -139,7 +163,11 @@ func (lc *SLoginCredentials) GetShipments(pld *sales.GetShipments) (*sales.GetSh
 
 	response := &sales.GetShipmentsResponse{}
 	err := do(credPld, response, "sales/getShipments")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetShipments()", err}
+	}
+
+	return response, nil
 }
 
 // postGetSoldItems payload sent to Sku Vault.
@@ -159,7 +187,11 @@ func (lc *SLoginCredentials) GetSoldItems(pld *sales.GetSoldItems) (*sales.GetSo
 
 	response := &sales.GetSoldItemsResponse{}
 	err := do(credPld, response, "sales/getSoldItems")
-	return response, err
+	if err != nil {
+		return nil, &Error{"GetSoldItems()", err}
+	}
+
+	return response, nil
 }
 
 // postReleaseHeldQuantities payload sent to Sku Vault.
@@ -179,7 +211,11 @@ func (lc *SLoginCredentials) ReleaseHeldQuantities(pld *sales.ReleaseHeldQuantit
 
 	response := &sales.ReleaseHeldQuantitiesResponse{}
 	err := do(credPld, response, "sales/releaseHeldQuantities")
-	return response, err
+	if err != nil {
+		return nil, &Error{"ReleaseHeldQuantities()", err}
+	}
+
+	return response, nil
 }
 
 // postSetShipmentFile payload sent to Sku Vault.
@@ -199,7 +235,11 @@ func (lc *SLoginCredentials) SetShipmentFile(pld *sales.SetShipmentFile) (*sales
 
 	response := &sales.SetShipmentFileResponse{}
 	err := do(credPld, response, "sales/setShipmentFile")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SetShipmentFile()", err}
+	}
+
+	return response, nil
 }
 
 // postSyncOnlineSale payload sent to Sku Vault.
@@ -219,7 +259,11 @@ func (lc *SLoginCredentials) SyncOnlineSale(pld *sales.SyncOnlineSale) (*sales.S
 
 	response := &sales.SyncOnlineSaleResponse{}
 	err := do(credPld, response, "sales/syncOnlineSale")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SyncOnlineSale()", err}
+	}
+
+	return response, nil
 }
 
 // postSyncOnlineSales payload sent to Sku Vault.
@@ -239,7 +283,11 @@ func (lc *SLoginCredentials) SyncOnlineSales(pld *sales.SyncOnlineSales) (*sales
 
 	response := &sales.SyncOnlineSalesResponse{}
 	err := do(credPld, response, "sales/syncOnlineSales")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SyncOnlineSales()", err}
+	}
+
+	return response, nil
 }
 
 // postSyncShippedSaleAndRemoveItems payload sent to Sku Vault.
@@ -259,7 +307,11 @@ func (lc *SLoginCredentials) SyncShippedSaleAndRemoveItems(pld *sales.SyncShippe
 
 	response := &sales.SyncShippedSaleAndRemoveItemsResponse{}
 	err := do(credPld, response, "sales/syncShippedSaleAndRemoveItems")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SyncShippedSaleAndRemoveItems()", err}
+	}
+
+	return response, nil
 }
 
 // postSyncShippedSaleAndRemoveItemsBulk payload sent to Sku Vault.
@@ -279,7 +331,11 @@ func (lc *SLoginCredentials) SyncShippedSaleAndRemoveItemsBulk(pld *sales.SyncSh
 
 	response := &sales.SyncShippedSaleAndRemoveItemsBulkResponse{}
 	err := do(credPld, response, "sales/syncShippedSaleAndRemoveItemsBulk")
-	return response, err
+	if err != nil {
+		return nil, &Error{"SyncShippedSaleAndRemoveItemsBulk()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateOnlineSaleStatus payload sent to Sku Vault.
@@ -299,7 +355,11 @@ func (lc *SLoginCredentials) UpdateOnlineSaleStatus(pld *sales.UpdateOnlineSaleS
 
 	response := &sales.UpdateOnlineSaleStatusResponse{}
 	err := do(credPld, response, "sales/updateOnlineSaleStatus")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateOnlineSaleStatus()", err}
+	}
+
+	return response, nil
 }
 
 // postUpdateShipments payload sent to Sku Vault.
@@ -319,5 +379,9 @@ func (lc *SLoginCredentials) UpdateShipments(pld *sales.UpdateShipments) (*sales
 
 	response := &sales.UpdateShipmentsResponse{}
 	err := do(credPld, response, "sales/updateShipments")
-	return response, err
+	if err != nil {
+		return nil, &Error{"UpdateShipments()", err}
+	}
+
+	return response, nil
 }
