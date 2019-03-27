@@ -7,7 +7,7 @@ type GetLocationsResponse struct {
 		ContainerCode  string `json:"ContainerCode"`
 		LocationCode   string `json:"LocationCode"`
 		ParentLocation string `json:"ParentLocation"`
-		TotalQuantity  int64  `json:"TotalQuantity"`
+		TotalQuantity     int  `json:"TotalQuantity"`
 		WarehouseCode  string `json:"WarehouseCode"`
 		WarehouseName  string `json:"WarehouseName"`
 	} `json:"Items"`

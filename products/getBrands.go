@@ -2,7 +2,7 @@ package products
 
 // GetBrands is a automatically generated struct from json provided by sku vault's api docs.
 type GetBrands struct {
-	PageNumber int64 `json:"PageNumber"`
+	PageNumber                int `json:"PageNumber"`
 }
 
 // GetBrandsResponse is a automatically generated struct from json provided by sku vault's api docs.

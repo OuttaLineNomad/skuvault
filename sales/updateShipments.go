@@ -5,9 +5,9 @@ type UpdateShipments struct {
 	Shipments []struct {
 		Carrier     string `json:"Carrier"`
 		LandedCosts []struct {
-			Amount          int64  `json:"Amount"`
-			CurrencyIsoCode string `json:"CurrencyIsoCode"`
-			Sku             string `json:"Sku"`
+			Amount          float64 `json:"Amount"`
+			CurrencyIsoCode string  `json:"CurrencyIsoCode"`
+			Sku             string  `json:"Sku"`
 		} `json:"LandedCosts"`
 		SaleID         string `json:"SaleId"`
 		Status         string `json:"Status"`

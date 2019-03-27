@@ -1,14 +1,17 @@
 package sales
 
+import "time"
+
 // GetSalesByDate is a automatically generated struct from json provided by sku vault's api docs.
 type GetSalesByDate struct {
-	DateField  string `json:"DateField"`
-	FromDate   string `json:"FromDate"`
-	PageNumber int64  `json:"PageNumber"`
-	PageSize   int64  `json:"PageSize"`
-	ToDate     string `json:"ToDate"`
+	DateField  time.Time `json:"DateField"`
+	FromDate   time.Time `json:"FromDate"`
+	PageNumber int       `json:"PageNumber"`
+	PageSize   int       `json:"PageSize"`
+	ToDate     time.Time `json:"ToDate"`
 }
 
+// GetSalesByDateResponse is a automatically generated struct from json provided by sku vault's api docs.
 type GetSalesByDateResponse []struct {
 	Channel     string `json:"Channel"`
 	ChannelID   string `json:"ChannelId"`
@@ -20,40 +23,52 @@ type GetSalesByDateResponse []struct {
 		LastName  string `json:"LastName"`
 		Phone     string `json:"Phone"`
 	} `json:"ContactInfo"`
-	FulfilledItems  []interface{} `json:"FulfilledItems"`
+	FulfilledItems []struct {
+		Quantity  int     `json:"Quantity"`
+		Sku       string  `json:"Sku"`
+		UnitPrice float64 `json:"UnitPrice"`
+	} `json:"FulfilledItems"`
 	FulfilledKits   []interface{} `json:"FulfilledKits"`
 	ID              string        `json:"Id"`
-	LastPrintedDate string        `json:"LastPrintedDate"`
+	LastPrintedDate time.Time     `json:"LastPrintedDate"`
 	Marketplace     string        `json:"Marketplace"`
 	MarketplaceID   string        `json:"MarketplaceId"`
 	MerchantItems   []struct {
 		PartNumber string `json:"PartNumber"`
-		Quantity   int64  `json:"Quantity"`
+		Quantity   int    `json:"Quantity"`
 		Sku        string `json:"Sku"`
 		UnitPrice  struct {
-			A int64  `json:"a"`
-			S string `json:"s"`
+			A float64 `json:"a"`
+			S string  `json:"s"`
 		} `json:"UnitPrice"`
 	} `json:"MerchantItems"`
-	MerchantKits   []interface{} `json:"MerchantKits"`
-	Notes          string        `json:"Notes"`
-	PrintedStatus  bool          `json:"PrintedStatus"`
+	MerchantKits []struct {
+		KitItems  struct{} `json:"KitItems"`
+		Quantity  int      `json:"Quantity"`
+		Sku       string   `json:"Sku"`
+		UnitPrice struct {
+			A float64 `json:"a"`
+			S string  `json:"s"`
+		} `json:"UnitPrice"`
+	} `json:"MerchantKits"`
+	Notes          string `json:"Notes"`
+	PrintedStatus  bool   `json:"PrintedStatus"`
 	ProcessedItems []struct {
-		FailedQuantity int64  `json:"FailedQuantity"`
-		PassedQuantity int64  `json:"PassedQuantity"`
-		PickedQuantity int64  `json:"PickedQuantity"`
+		FailedQuantity int    `json:"FailedQuantity"`
+		PassedQuantity int    `json:"PassedQuantity"`
+		PickedQuantity int    `json:"PickedQuantity"`
 		Sku            string `json:"Sku"`
 	} `json:"ProcessedItems"`
-	SaleDate        string `json:"SaleDate"`
-	ShippingCarrier string `json:"ShippingCarrier"`
+	SaleDate        time.Time `json:"SaleDate"`
+	ShippingCarrier string    `json:"ShippingCarrier"`
 	ShippingCharge  struct {
-		A int64  `json:"a"`
-		S string `json:"s"`
+		A float64 `json:"a"`
+		S string  `json:"s"`
 	} `json:"ShippingCharge"`
 	ShippingClass string `json:"ShippingClass"`
 	ShippingCost  struct {
-		A int64  `json:"a"`
-		S string `json:"s"`
+		A float64 `json:"a"`
+		S string  `json:"s"`
 	} `json:"ShippingCost"`
 	ShippingInfo struct {
 		Address1   string `json:"Address1"`

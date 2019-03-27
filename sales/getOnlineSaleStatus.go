@@ -1,5 +1,7 @@
 package sales
 
+import "time"
+
 // GetOnlineSaleStatus is a automatically generated struct from json provided by sku vault's api docs.
 type GetOnlineSaleStatus struct {
 	OrderIds []string `json:"OrderIds"`
@@ -11,12 +13,12 @@ type GetOnlineSaleStatusResponse struct {
 		ID    string `json:"Id"`
 		Items []struct {
 			OnlineSaleItemStatus string `json:"OnlineSaleItemStatus"`
-			Quantity             int64  `json:"Quantity"`
+			Quantity             int    `json:"Quantity"`
 			Sku                  string `json:"Sku"`
 		} `json:"Items"`
-		LastPrintedDate string `json:"LastPrintedDate"`
-		Notes           string `json:"Notes"`
-		PrintedStatus   bool   `json:"PrintedStatus"`
-		Status          string `json:"Status"`
+		LastPrintedDate time.Time `json:"LastPrintedDate"`
+		Notes           string    `json:"Notes"`
+		PrintedStatus   bool      `json:"PrintedStatus"`
+		Status          string    `json:"Status"`
 	} `json:"Sales"`
 }

@@ -4,19 +4,19 @@ package sales
 type SyncShippedSaleAndRemoveItemsBulk struct {
 	Sales []struct {
 		FulfilledItems []struct {
-			Quantity  int64  `json:"Quantity"`
-			Sku       string `json:"Sku"`
-			UnitPrice int64  `json:"UnitPrice"`
+			Quantity  int     `json:"Quantity"`
+			Sku       string  `json:"Sku"`
+			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"FulfilledItems"`
 		ItemSkus []struct {
-			Quantity  int64  `json:"Quantity"`
-			Sku       string `json:"Sku"`
-			UnitPrice int64  `json:"UnitPrice"`
+			Quantity  int     `json:"Quantity"`
+			Sku       string  `json:"Sku"`
+			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"ItemSkus"`
-		Notes        string `json:"Notes"`
-		OrderDateUtc string `json:"OrderDateUtc"`
-		OrderID      string `json:"OrderId"`
-		OrderTotal   int64  `json:"OrderTotal"`
+		Notes        string  `json:"Notes"`
+		OrderDateUtc time.Time  `json:"OrderDateUtc"`
+		OrderID      string  `json:"OrderId"`
+		OrderTotal   float64 `json:"OrderTotal"`
 		ShippingInfo struct {
 			City            string `json:"City"`
 			CompanyName     string `json:"CompanyName"`
@@ -32,7 +32,7 @@ type SyncShippedSaleAndRemoveItemsBulk struct {
 			ShippingCarrier string `json:"ShippingCarrier"`
 			ShippingClass   string `json:"ShippingClass"`
 		} `json:"ShippingInfo"`
-		WarehouseID int64 `json:"WarehouseId"`
+		WarehouseID int `json:"WarehouseId"`
 	} `json:"Sales"`
 }
 

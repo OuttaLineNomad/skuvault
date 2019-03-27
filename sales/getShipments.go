@@ -1,5 +1,7 @@
 package sales
 
+import "time"
+
 // GetShipments is a automatically generated struct from json provided by sku vault's api docs.
 type GetShipments struct {
 	SaleIds []string `json:"SaleIds"`
@@ -14,19 +16,19 @@ type GetShipmentsResponse struct {
 		Class       string `json:"Class"`
 		Costs       []struct {
 			Cost struct {
-				A int64  `json:"a"`
-				S string `json:"s"`
+				A float64 `json:"a"`
+				S string  `json:"s"`
 			} `json:"Cost"`
 			CostType string `json:"CostType"`
 		} `json:"Costs"`
-		CreatedDate           string     `json:"CreatedDate"`
-		EstimatedDeliveryDate string     `json:"EstimatedDeliveryDate"`
-		EstimatedShipDate     string     `json:"EstimatedShipDate"`
+		CreatedDate           time.Time  `json:"CreatedDate"`
+		EstimatedDeliveryDate time.Time  `json:"EstimatedDeliveryDate"`
+		EstimatedShipDate     time.Time  `json:"EstimatedShipDate"`
 		FileIds               []struct{} `json:"FileIds"`
 		LandedCosts           []struct {
 			Cost struct {
-				A int64  `json:"a"`
-				S string `json:"s"`
+				A float64 `json:"a"`
+				S string  `json:"s"`
 			} `json:"Cost"`
 			Sku string `json:"Sku"`
 		} `json:"LandedCosts"`
@@ -34,29 +36,29 @@ type GetShipmentsResponse struct {
 		Note       string `json:"Note"`
 		Parcels    []struct {
 			Dimensions struct {
-				Height int64  `json:"Height"`
-				Length int64  `json:"Length"`
-				Unit   string `json:"Unit"`
-				Width  int64  `json:"Width"`
+				Height int     `json:"Height"`
+				Length int     `json:"Length"`
+				Unit   string  `json:"Unit"`
+				Width  float64 `json:"Width"`
 			} `json:"Dimensions"`
 			Items []struct {
 				ID       string `json:"Id"`
-				Quantity int64  `json:"Quantity"`
+				Quantity int    `json:"Quantity"`
 				Sku      string `json:"Sku"`
 			} `json:"Items"`
 			Kits []struct {
 				ID    string `json:"Id"`
 				Items []struct {
 					ID       string `json:"Id"`
-					Quantity int64  `json:"Quantity"`
+					Quantity int    `json:"Quantity"`
 				} `json:"Items"`
-				Quantity int64  `json:"Quantity"`
+				Quantity int    `json:"Quantity"`
 				Sku      string `json:"Sku"`
 			} `json:"Kits"`
-			Note       string `json:"Note"`
-			Number     int64  `json:"Number"`
-			Weight     int64  `json:"Weight"`
-			WeightUnit string `json:"WeightUnit"`
+			Note       string  `json:"Note"`
+			Number     int     `json:"Number"`
+			Weight     float64 `json:"Weight"`
+			WeightUnit string  `json:"WeightUnit"`
 		} `json:"Parcels"`
 		SaleID      string `json:"SaleId"`
 		ShippedFrom struct {
@@ -76,13 +78,13 @@ type GetShipmentsResponse struct {
 			ThreePL       bool   `json:"ThreePL"`
 			WarehouseCode string `json:"WarehouseCode"`
 		} `json:"ShippedFrom"`
-		Source         string `json:"Source"`
-		Status         string `json:"Status"`
-		TotalWeight    int64  `json:"TotalWeight"`
-		TrackingNumber string `json:"TrackingNumber"`
-		TrackingURL    string `json:"TrackingUrl"`
-		Type           string `json:"Type"`
-		WeightUnit     string `json:"WeightUnit"`
+		Source         string  `json:"Source"`
+		Status         string  `json:"Status"`
+		TotalWeight    float64 `json:"TotalWeight"`
+		TrackingNumber string  `json:"TrackingNumber"`
+		TrackingURL    string  `json:"TrackingUrl"`
+		Type           string  `json:"Type"`
+		WeightUnit     string  `json:"WeightUnit"`
 	} `json:"Shipments"`
 	Status string `json:"Status"`
 }

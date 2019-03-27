@@ -1,20 +1,22 @@
 package inventory
 
+import "time"
+
 // GetAvailableQuantities is a automatically generated struct from json provided by sku vault's api docs.
 type GetAvailableQuantities struct {
-	ExpandAlternateSkus       bool        `json:"ExpandAlternateSkus"`
-	ModifiedAfterDateTimeUtc  string      `json:"ModifiedAfterDateTimeUtc"`
-	ModifiedBeforeDateTimeUtc string      `json:"ModifiedBeforeDateTimeUtc"`
-	PageNumber                int64       `json:"PageNumber"`
-	PageSize                  interface{} `json:"PageSize"`
+	ExpandAlternateSkus       bool      `json:"ExpandAlternateSkus"`
+	ModifiedAfterDateTimeUtc  time.Time `json:"ModifiedAfterDateTimeUtc"`
+	ModifiedBeforeDateTimeUtc time.Time `json:"ModifiedBeforeDateTimeUtc"`
+	PageNumber                int       `json:"PageNumber"`
+	PageSize                  int       `json:"PageSize"`
 }
 
 // GetAvailableQuantitiesResponse is a automatically generated struct from json provided by sku vault's api docs.
 type GetAvailableQuantitiesResponse struct {
 	Items []struct {
-		AvailableQuantity       int64  `json:"AvailableQuantity"`
-		IsAlternateSku          bool   `json:"IsAlternateSku"`
-		LastModifiedDateTimeUtc string `json:"LastModifiedDateTimeUtc"`
-		Sku                     string `json:"Sku"`
+		AvailableQuantity       int       `json:"AvailableQuantity"`
+		IsAlternateSku          bool      `json:"IsAlternateSku"`
+		LastModifiedDateTimeUtc time.Time `json:"LastModifiedDateTimeUtc"`
+		Sku                     string    `json:"Sku"`
 	} `json:"Items"`
 }

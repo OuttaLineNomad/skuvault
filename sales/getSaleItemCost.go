@@ -11,8 +11,8 @@ type GetSaleItemCostResponse struct {
 	Sales  []struct {
 		Items []struct {
 			Cost struct {
-				A int64  `json:"a"`
-				S string `json:"s"`
+				A float64 `json:"a"`
+				S string  `json:"s"`
 			} `json:"Cost"`
 			Sku string `json:"Sku"`
 		} `json:"Items"`

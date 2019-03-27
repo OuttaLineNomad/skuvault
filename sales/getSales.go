@@ -1,5 +1,7 @@
 package sales
 
+import "time"
+
 // GetSales is a automatically generated struct from json provided by sku vault's api docs.
 type GetSales struct {
 	OrderIds []string `json:"OrderIds"`
@@ -17,41 +19,45 @@ type GetSalesResponse struct {
 			LastName  string `json:"LastName"`
 			Phone     string `json:"Phone"`
 		} `json:"ContactInfo"`
-		FulfilledItems  []interface{} `json:"FulfilledItems"`
+		FulfilledItems []struct {
+			Quantity  int     `json:"Quantity"`
+			Sku       string  `json:"Sku"`
+			UnitPrice float64 `json:"UnitPrice"`
+		} `json:"FulfilledItems"`
 		FulfilledKits   []interface{} `json:"FulfilledKits"`
 		ID              string        `json:"Id"`
-		LastPrintedDate string        `json:"LastPrintedDate"`
+		LastPrintedDate time.Time     `json:"LastPrintedDate"`
 		Marketplace     string        `json:"Marketplace"`
 		MarketplaceID   string        `json:"MarketplaceId"`
 		MerchantItems   []struct {
-			Quantity  int64  `json:"Quantity"`
+			Quantity  int    `json:"Quantity"`
 			Sku       string `json:"Sku"`
 			UnitPrice struct {
-				A int64  `json:"a"`
-				S string `json:"s"`
+				A float64 `json:"a"`
+				S string  `json:"s"`
 			} `json:"UnitPrice"`
 		} `json:"MerchantItems"`
 		MerchantKits []struct {
 			KitItems  struct{} `json:"KitItems"`
-			Quantity  int64    `json:"Quantity"`
+			Quantity  int      `json:"Quantity"`
 			Sku       string   `json:"Sku"`
 			UnitPrice struct {
-				A int64  `json:"a"`
-				S string `json:"s"`
+				A float64 `json:"a"`
+				S string  `json:"s"`
 			} `json:"UnitPrice"`
 		} `json:"MerchantKits"`
-		Notes           string `json:"Notes"`
-		PrintedStatus   bool   `json:"PrintedStatus"`
-		SaleDate        string `json:"SaleDate"`
-		ShippingCarrier string `json:"ShippingCarrier"`
+		Notes           string    `json:"Notes"`
+		PrintedStatus   bool      `json:"PrintedStatus"`
+		SaleDate        time.Time `json:"SaleDate"`
+		ShippingCarrier string    `json:"ShippingCarrier"`
 		ShippingCharge  struct {
-			A int64  `json:"a"`
-			S string `json:"s"`
+			A float64 `json:"a"`
+			S string  `json:"s"`
 		} `json:"ShippingCharge"`
 		ShippingClass string `json:"ShippingClass"`
 		ShippingCost  struct {
-			A int64  `json:"a"`
-			S string `json:"s"`
+			A float64 `json:"a"`
+			S string  `json:"s"`
 		} `json:"ShippingCost"`
 		ShippingInfo struct {
 			Address1   string `json:"Address1"`

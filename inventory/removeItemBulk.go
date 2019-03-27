@@ -5,10 +5,10 @@ type RemoveItemBulk struct {
 	Items []struct {
 		Code         string `json:"Code"`
 		LocationCode string `json:"LocationCode"`
-		Quantity     int64  `json:"Quantity"`
+		Quantity     int  `json:"Quantity"`
 		Reason       string `json:"Reason"`
 		Sku          string `json:"Sku"`
-		WarehouseID  int64  `json:"WarehouseId"`
+		WarehouseID  int  `json:"WarehouseId"`
 	} `json:"Items"`
 }
 

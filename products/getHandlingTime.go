@@ -6,11 +6,11 @@ type GetHandlingTimeResponse struct {
 	Items  []struct {
 		AccountID string `json:"AccountId"`
 		Kits      []struct {
-			Quantity int64  `json:"Quantity"`
+			Quantity     int  `json:"Quantity"`
 			Sku      string `json:"Sku"`
 		} `json:"Kits"`
 		Products []struct {
-			Quantity int64  `json:"Quantity"`
+			Quantity     int  `json:"Quantity"`
 			Sku      string `json:"Sku"`
 		} `json:"Products"`
 	} `json:"Items"`

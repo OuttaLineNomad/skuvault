@@ -5,7 +5,7 @@ type UpdateHandlingTime struct {
 	Items []struct {
 		HandlingTime []struct {
 			AccountID string `json:"AccountId"`
-			Quantity  int64  `json:"Quantity"`
+			Quantity     int  `json:"Quantity"`
 		} `json:"HandlingTime"`
 		Sku string `json:"Sku"`
 	} `json:"Items"`

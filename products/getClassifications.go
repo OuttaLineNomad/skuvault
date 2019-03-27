@@ -2,7 +2,7 @@ package products
 
 // GetClassifications is a automatically generated struct from json provided by sku vault's api docs.
 type GetClassifications struct {
-	PageNumber int64 `json:"PageNumber"`
+	PageNumber                int `json:"PageNumber"`
 }
 
 // GetClassificationsResponse is a automatically generated struct from json provided by sku vault's api docs.

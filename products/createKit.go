@@ -5,10 +5,10 @@ type CreateKit struct {
 	AllowCreateAp bool   `json:"AllowCreateAp"`
 	Code          string `json:"Code"`
 	KitLines      []struct {
-		Combine  int64    `json:"Combine"`
+		Combine  int      `json:"Combine"`
 		Items    []string `json:"Items"`
 		LineName string   `json:"LineName"`
-		Quantity int64    `json:"Quantity"`
+		Quantity int      `json:"Quantity"`
 	} `json:"KitLines"`
 	Sku   string `json:"Sku"`
 	Title string `json:"Title"`

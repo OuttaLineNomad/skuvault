@@ -6,24 +6,24 @@ type AddShipments struct {
 		Carrier string `json:"Carrier"`
 		Class   string `json:"Class"`
 		Costs   []struct {
-			Amount          int64  `json:"Amount"`
-			CostType        string `json:"CostType"`
-			CurrencyIsoCode string `json:"CurrencyIsoCode"`
+			Amount          float64 `json:"Amount"`
+			CostType        string  `json:"CostType"`
+			CurrencyIsoCode string  `json:"CurrencyIsoCode"`
 		} `json:"Costs"`
 		LandedCosts []struct {
-			Amount          int64  `json:"Amount"`
-			CurrencyIsoCode string `json:"CurrencyIsoCode"`
-			Sku             string `json:"Sku"`
+			Amount          float64 `json:"Amount"`
+			CurrencyIsoCode string  `json:"CurrencyIsoCode"`
+			Sku             string  `json:"Sku"`
 		} `json:"LandedCosts"`
 		Parcels []struct {
 			Items []struct {
-				Quantity int64  `json:"Quantity"`
+				Quantity int    `json:"Quantity"`
 				Sku      string `json:"Sku"`
 			} `json:"Items"`
-			Note       string `json:"Note"`
-			Number     int64  `json:"Number"`
-			Weight     int64  `json:"Weight"`
-			WeightUnit string `json:"WeightUnit"`
+			Note       string  `json:"Note"`
+			Number     int     `json:"Number"`
+			Weight     float64 `json:"Weight"`
+			WeightUnit string  `json:"WeightUnit"`
 		} `json:"Parcels"`
 		SaleID      string `json:"SaleId"`
 		ShippedFrom struct {

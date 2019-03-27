@@ -4,9 +4,9 @@ package inventory
 type SetItemQuantities struct {
 	Items []struct {
 		LocationCode string `json:"LocationCode"`
-		Quantity     int64  `json:"Quantity"`
+		Quantity     int  `json:"Quantity"`
 		Sku          string `json:"Sku"`
-		WarehouseID  int64  `json:"WarehouseId"`
+		WarehouseID  int  `json:"WarehouseId"`
 	} `json:"Items"`
 }
 

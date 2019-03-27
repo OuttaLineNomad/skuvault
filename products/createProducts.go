@@ -10,17 +10,17 @@ type CreateProducts struct {
 		Brand                    string   `json:"Brand"`
 		Classification           string   `json:"Classification"`
 		Code                     string   `json:"Code"`
-		Cost                     int64    `json:"Cost"`
+		Cost                     float64  `json:"Cost"`
 		Description              string   `json:"Description"`
 		LongDescription          string   `json:"LongDescription"`
-		MinimumOrderQuantity     int64    `json:"MinimumOrderQuantity"`
+		MinimumOrderQuantity     int      `json:"MinimumOrderQuantity"`
 		MinimumOrderQuantityInfo string   `json:"MinimumOrderQuantityInfo"`
 		Note                     string   `json:"Note"`
 		PartNumber               string   `json:"PartNumber"`
 		Pictures                 []string `json:"Pictures"`
-		ReorderPoint             int64    `json:"ReorderPoint"`
-		RetailPrice              int64    `json:"RetailPrice"`
-		SalePrice                int64    `json:"SalePrice"`
+		ReorderPoint             float64  `json:"ReorderPoint"`
+		RetailPrice              float64  `json:"RetailPrice"`
+		SalePrice                float64  `json:"SalePrice"`
 		ShortDescription         string   `json:"ShortDescription"`
 		Sku                      string   `json:"Sku"`
 		Statuses                 []string `json:"Statuses"`
@@ -33,9 +33,9 @@ type CreateProducts struct {
 			SupplierName       string `json:"SupplierName"`
 			SupplierPartNumber string `json:"SupplierPartNumber"`
 		} `json:"SupplierInfo"`
-		VariationParentSku string `json:"VariationParentSku"`
-		Weight             int64  `json:"Weight"`
-		WeightUnit         string `json:"WeightUnit"`
+		VariationParentSku string  `json:"VariationParentSku"`
+		Weight             float64 `json:"Weight"`
+		WeightUnit         string  `json:"WeightUnit"`
 	} `json:"Items"`
 }
 

@@ -4,13 +4,13 @@ package sales
 type CreateHolds struct {
 	Holds []struct {
 		Description       string `json:"Description"`
-		ExpirationDateUtc string `json:"ExpirationDateUtc"`
-		Quantity          int64  `json:"Quantity"`
+		ExpirationDateUtc time.Time `json:"ExpirationDateUtc"`
+		Quantity     int  `json:"Quantity"`
 		Sku               string `json:"Sku"`
 	} `json:"Holds"`
 }
 
 type CreateHoldsResponse []struct {
-	Quantity int64  `json:"Quantity"`
+	Quantity     int  `json:"Quantity"`
 	Sku      string `json:"Sku"`
 }

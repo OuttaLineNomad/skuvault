@@ -7,22 +7,22 @@ type SyncOnlineSales struct {
 		ChannelType      string `json:"ChannelType"`
 		CheckoutStatus   string `json:"CheckoutStatus"`
 		FulfilledItems   []struct {
-			Quantity  int64  `json:"Quantity"`
-			Sku       string `json:"Sku"`
-			UnitPrice int64  `json:"UnitPrice"`
+			Quantity  int     `json:"Quantity"`
+			Sku       string  `json:"Sku"`
+			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"FulfilledItems"`
 		ItemSkus []struct {
-			Quantity  int64  `json:"Quantity"`
-			Sku       string `json:"Sku"`
-			UnitPrice int64  `json:"UnitPrice"`
+			Quantity  int     `json:"Quantity"`
+			Sku       string  `json:"Sku"`
+			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"ItemSkus"`
-		MarketplaceID string `json:"MarketplaceId"`
-		Notes         string `json:"Notes"`
-		OrderDateUtc  string `json:"OrderDateUtc"`
-		OrderID       string `json:"OrderId"`
-		OrderTotal    int64  `json:"OrderTotal"`
-		PaymentStatus string `json:"PaymentStatus"`
-		SaleState     string `json:"SaleState"`
+		MarketplaceID string  `json:"MarketplaceId"`
+		Notes         string  `json:"Notes"`
+		OrderDateUtc  time.Time  `json:"OrderDateUtc"`
+		OrderID       string  `json:"OrderId"`
+		OrderTotal    float64 `json:"OrderTotal"`
+		PaymentStatus string  `json:"PaymentStatus"`
+		SaleState     string  `json:"SaleState"`
 		ShippingInfo  struct {
 			City            string `json:"City"`
 			CompanyName     string `json:"CompanyName"`

@@ -2,23 +2,23 @@ package inventory
 
 // GetItemQuantities is a automatically generated struct from json provided by sku vault's api docs.
 type GetItemQuantities struct {
-	ModifiedAfterDateTimeUtc  string      `json:"ModifiedAfterDateTimeUtc"`
-	ModifiedBeforeDateTimeUtc string      `json:"ModifiedBeforeDateTimeUtc"`
-	PageNumber                int64       `json:"PageNumber"`
-	PageSize                  interface{} `json:"PageSize"`
-	ProductCodes              []string    `json:"ProductCodes"`
+	ModifiedAfterDateTimeUtc  time.Time   `json:"ModifiedAfterDateTimeUtc"`
+	ModifiedBeforeDateTimeUtc time.Time   `json:"ModifiedBeforeDateTimeUtc"`
+	PageNumber                int      `json:"PageNumber"`
+	PageSize                  int      `json:"PageSize"`
+	ProductCodes              []string `json:"ProductCodes"`
 }
 
 // GetItemQuantitiesResponse is a automatically generated struct from json provided by sku vault's api docs.
 type GetItemQuantitiesResponse struct {
 	Items []struct {
-		AvailableQuantity       int64  `json:"AvailableQuantity"`
+		AvailableQuantity       int    `json:"AvailableQuantity"`
 		Code                    string `json:"Code"`
-		HeldQuantity            int64  `json:"HeldQuantity"`
-		LastModifiedDateTimeUtc string `json:"LastModifiedDateTimeUtc"`
-		PendingQuantity         int64  `json:"PendingQuantity"`
-		PickedQuantity          int64  `json:"PickedQuantity"`
+		HeldQuantity            int    `json:"HeldQuantity"`
+		LastModifiedDateTimeUtc time.Time `json:"LastModifiedDateTimeUtc"`
+		PendingQuantity         int    `json:"PendingQuantity"`
+		PickedQuantity          int    `json:"PickedQuantity"`
 		Sku                     string `json:"Sku"`
-		TotalOnHand             int64  `json:"TotalOnHand"`
+		TotalOnHand             int    `json:"TotalOnHand"`
 	} `json:"Items"`
 }
