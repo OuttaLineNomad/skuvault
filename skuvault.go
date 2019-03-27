@@ -17,11 +17,11 @@ const (
 
 // Ctr is the controls the flow of endpoints.
 type Ctr struct {
-	inventory      *ILoginCredentials
-	products       *PLoginCredentials
-	sales          *SLoginCredentials
-	purchaseorders *POLoginCredentials
-	integration    *INLoginCredentials
+	Inventory      *ILoginCredentials
+	Products       *PLoginCredentials
+	Sales          *SLoginCredentials
+	Purchaseorders *POLoginCredentials
+	Integration    *INLoginCredentials
 }
 
 // LoginCredentials hold credentials to sign into SKU Vault API for endpoints.
@@ -35,22 +35,22 @@ type ILoginCredentials struct {
 	LoginCredentials
 }
 
-// PLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+// PLoginCredentials hold credentials to sign into SKU Vault API for products endpoints.
 type PLoginCredentials struct {
 	LoginCredentials
 }
 
-// SLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+// SLoginCredentials hold credentials to sign into SKU Vault API for sales endpoints.
 type SLoginCredentials struct {
 	LoginCredentials
 }
 
-// POLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+// POLoginCredentials hold credentials to sign into SKU Vault API for purchase orders endpoints.
 type POLoginCredentials struct {
 	LoginCredentials
 }
 
-// INLoginCredentials hold credentials to sign into SKU Vault API for inventory endpoints.
+// INLoginCredentials hold credentials to sign into SKU Vault API for integrations endpoints.
 type INLoginCredentials struct {
 	LoginCredentials
 }
@@ -69,11 +69,11 @@ func NewSession(tTok, uTok string) *Ctr {
 	}
 
 	return &Ctr{
-		inventory:      &ILoginCredentials{svc},
-		products:       &PLoginCredentials{svc},
-		sales:          &SLoginCredentials{svc},
-		purchaseorders: &POLoginCredentials{svc},
-		integration:    &INLoginCredentials{svc},
+		Inventory:      &ILoginCredentials{svc},
+		Products:       &PLoginCredentials{svc},
+		Sales:          &SLoginCredentials{svc},
+		Purchaseorders: &POLoginCredentials{svc},
+		Integration:    &INLoginCredentials{svc},
 	}
 }
 
