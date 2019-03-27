@@ -1,5 +1,7 @@
 package sales
 
+import "time"
+
 // SyncShippedSaleAndRemoveItemsBulk is a automatically generated struct from json provided by sku vault's api docs.
 type SyncShippedSaleAndRemoveItemsBulk struct {
 	Sales []struct {
@@ -13,10 +15,10 @@ type SyncShippedSaleAndRemoveItemsBulk struct {
 			Sku       string  `json:"Sku"`
 			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"ItemSkus"`
-		Notes        string  `json:"Notes"`
-		OrderDateUtc time.Time  `json:"OrderDateUtc"`
-		OrderID      string  `json:"OrderId"`
-		OrderTotal   float64 `json:"OrderTotal"`
+		Notes        string    `json:"Notes"`
+		OrderDateUtc time.Time `json:"OrderDateUtc"`
+		OrderID      string    `json:"OrderId"`
+		OrderTotal   float64   `json:"OrderTotal"`
 		ShippingInfo struct {
 			City            string `json:"City"`
 			CompanyName     string `json:"CompanyName"`

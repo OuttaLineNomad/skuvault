@@ -1,5 +1,7 @@
 package sales
 
+import "time"
+
 // SyncOnlineSales is a automatically generated struct from json provided by sku vault's api docs.
 type SyncOnlineSales struct {
 	Sales []struct {
@@ -16,13 +18,13 @@ type SyncOnlineSales struct {
 			Sku       string  `json:"Sku"`
 			UnitPrice float64 `json:"UnitPrice"`
 		} `json:"ItemSkus"`
-		MarketplaceID string  `json:"MarketplaceId"`
-		Notes         string  `json:"Notes"`
-		OrderDateUtc  time.Time  `json:"OrderDateUtc"`
-		OrderID       string  `json:"OrderId"`
-		OrderTotal    float64 `json:"OrderTotal"`
-		PaymentStatus string  `json:"PaymentStatus"`
-		SaleState     string  `json:"SaleState"`
+		MarketplaceID string    `json:"MarketplaceId"`
+		Notes         string    `json:"Notes"`
+		OrderDateUtc  time.Time `json:"OrderDateUtc"`
+		OrderID       string    `json:"OrderId"`
+		OrderTotal    float64   `json:"OrderTotal"`
+		PaymentStatus string    `json:"PaymentStatus"`
+		SaleState     string    `json:"SaleState"`
 		ShippingInfo  struct {
 			City            string `json:"City"`
 			CompanyName     string `json:"CompanyName"`
