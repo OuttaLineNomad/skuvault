@@ -10,12 +10,12 @@ type postGetIntegrations struct {
 // GetIntegrations creates http request for this SKU vault endpoint.
 // Severe Throttle.
 // Returns a list of your enabled channel accounts. No page parameters..
-func (lc *INLoginCredentials) GetIntegrations() *integration.GetIntegrationsResponse {
+func (lc *INLoginCredentials) GetIntegrations() (*integration.GetIntegrationsResponse, error) {
 	credPld := &postGetIntegrations{
 		INLoginCredentials: lc,
 	}
 
 	response := &integration.GetIntegrationsResponse{}
-	do(credPld, response, "integration/getIntegrations")
-	return response
+	err := do(credPld, response, "integration/getIntegrations")
+	return response, err
 }

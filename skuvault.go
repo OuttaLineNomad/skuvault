@@ -4,14 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"time"
 )
 
 const (
-	// url is a constant for all sku vault calls
+	// url is a constant for all skuvault calls
 	url = "https://app.skuvault.com/api/"
 )
 
@@ -45,12 +44,12 @@ type SLoginCredentials struct {
 	LoginCredentials
 }
 
-// POLoginCredentials hold credentials to sign into SKU Vault API for purchase orders endpoints.
+// POLoginCredentials hold credentials to sign into SKU Vault API for purchaseorders endpoints.
 type POLoginCredentials struct {
 	LoginCredentials
 }
 
-// INLoginCredentials hold credentials to sign into SKU Vault API for integrations endpoints.
+// INLoginCredentials hold credentials to sign into SKU Vault API for integration endpoints.
 type INLoginCredentials struct {
 	LoginCredentials
 }
@@ -108,16 +107,16 @@ func GetTokensCall(pld *GetTokens) *GetTokensResponse {
 }
 
 // do internal makes calls based on information passed in from other Do calls for each endpoint
-func do(pld interface{}, response interface{}, endPoint string) {
+func do(pld interface{}, response interface{}, endPoint string) error {
 	fullURL := url + endPoint
 	bt, err := json.Marshal(pld)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	payload := bytes.NewReader(bt)
 	req, err := http.NewRequest(http.MethodPost, fullURL, payload)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "application/json")
@@ -128,20 +127,20 @@ func do(pld interface{}, response interface{}, endPoint string) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
 	// fmt.Println(string(b))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	err = json.Unmarshal(b, response)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-
+	return nil
 }
 
 // TimeString converts time to proper formated string for Sku Vault
