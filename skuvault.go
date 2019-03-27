@@ -3,6 +3,7 @@ package skuvault
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -141,6 +142,11 @@ func do(pld interface{}, response interface{}, endPoint string) error {
 	}
 	defer resp.Body.Close()
 
+	var respErr error
+	if resp.StatusCode != 200 {
+		respErr = errors.New(resp.Status)
+	}
+
 	b, err := ioutil.ReadAll(resp.Body)
 	// fmt.Println(string(b))
 	if err != nil {
@@ -150,7 +156,8 @@ func do(pld interface{}, response interface{}, endPoint string) error {
 	if err != nil {
 		return err
 	}
-	return nil
+
+	return respErr
 }
 
 // TimeString converts time to proper formated string for Sku Vault
