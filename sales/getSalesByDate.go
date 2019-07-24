@@ -4,7 +4,7 @@ import "time"
 
 // GetSalesByDate is a automatically generated struct from json provided by sku vault's api docs.
 type GetSalesByDate struct {
-	DateField  time.Time `json:"DateField"`
+	DateField  string    `json:"DateField"`
 	FromDate   time.Time `json:"FromDate"`
 	PageNumber int       `json:"PageNumber"`
 	PageSize   int       `json:"PageSize"`
