@@ -24,9 +24,12 @@ type GetSalesByDateResponse []struct {
 		Phone     string `json:"Phone"`
 	} `json:"ContactInfo"`
 	FulfilledItems []struct {
-		Quantity  int     `json:"Quantity"`
-		Sku       string  `json:"Sku"`
-		UnitPrice float64 `json:"UnitPrice"`
+		Quantity  int    `json:"Quantity"`
+		Sku       string `json:"Sku"`
+		UnitPrice struct {
+			A float64 `json:"a"`
+			S string  `json:"s"`
+		} `json:"UnitPrice"`
 	} `json:"FulfilledItems"`
 	FulfilledKits   []interface{} `json:"FulfilledKits"`
 	ID              string        `json:"Id"`
